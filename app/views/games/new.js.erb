@@ -1,0 +1,5 @@
+<% if @game.size.blank? -%>
+display_message('Game size no specified!', 'danger');
+<% else -%>
+$("#game").html("<%= escape_javascript(render 'game') %>")
+<% end -%>

@@ -9,3 +9,11 @@
     <%= button_to "3 x 3", new_game_path, remote: true, method: :get, data: { disable_with: 'loading game...' }, params: { size: 3 }, class: 'btn btn-primary' %>
   </div>
 </div>
+
+<hr>
+
+<div class="card">
+  <div id="game" class="card-block">
+    <p class="text-center display-3 text-danger">Please select game size above!</p>
+  </div>
+</div>
