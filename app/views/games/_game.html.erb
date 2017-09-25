@@ -1,1 +1,32 @@
-Hellow World!
+<% i = 0 %>
+<div class="row justify-content-center">
+  <div class="col-6">
+    <table id="grid" class="table table-bordered" data-size="<%= @game.size %>">
+      <tbody>
+        <% @game.size.times do -%>
+          <tr>
+            <% @game.size.times do -%>
+              <% player = @game.table[i] %>
+              <td class="active text-center" data-position="<%= i %>"><span class="cell <%= player %>"><%= player == Game::NEUTRO ? '&nbsp;'.html_safe : player %></span></td>
+              <% i += 1 %>
+            <% end -%>
+          </tr>
+        <% end -%>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<% if @game.end? %>
+  <div class="row justify-content-center">
+    <%= button_to "Restart", new_game_path, remote: true, method: :get, data: { disable_with: 'loading game...' }, params: { size: @game.size }, class: 'btn btn-primary' %>
+  </div>
+  <% if @game.win?(Game::PLAYER_1) %>
+    <script>display_message("PLAYER WON!", 'success'); show_background("<%= Game::PLAYER_1 %>");</script>
+  <% elsif @game.win?(Game::PLAYER_2) %>
+    <script>display_message("COMPUTER WON!", 'danger'); show_background("<%= Game::PLAYER_2 %>");</script>
+  <% else %>
+    <script>display_message("IT'S A DRAW!", 'warning')</script>
+  <% end %>
+  <script>$('td.active').removeClass('active');</script>
+<% end %>

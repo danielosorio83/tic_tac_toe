@@ -8,12 +8,30 @@
   <div class="col-md-auto">
     <%= button_to "3 x 3", new_game_path, remote: true, method: :get, data: { disable_with: 'loading game...' }, params: { size: 3 }, class: 'btn btn-primary' %>
   </div>
+  <!-- <div class="col-md-auto">
+    <%= button_to "4 x 4", new_game_path, remote: true, method: :get, data: { disable_with: 'loading game...' }, params: { size: 4 }, class: 'btn btn-primary' %>
+  </div>
+  <div class="col-md-auto">
+    <%= button_to "5 x 5", new_game_path, remote: true, method: :get, data: { disable_with: 'loading game...' }, params: { size: 5 }, class: 'btn btn-primary' %>
+  </div> -->
 </div>
 
 <hr>
 
 <div class="card">
+  <div id="loader" class="card-block">
+    <div class="loader"></div>
+  </div>
   <div id="game" class="card-block">
     <p class="text-center display-3 text-danger">Please select game size above!</p>
   </div>
 </div>
+
+<% content_for :scripts do -%>
+<script>
+  var PLAYER_1 = '<%= Game::PLAYER_1 %>';
+  var PLAYER_2 = '<%= Game::PLAYER_2 %>';
+  var NEUTRO = '<%= Game::NEUTRO %>';
+  var GAME_URL = '<%= game_path %>';
+</script>
+<% end -%>
